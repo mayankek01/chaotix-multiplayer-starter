@@ -8,6 +8,7 @@
   "dependencies": {
     "colyseus": "^0.15.14",
     "express": "^4.19.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "@colyseus/core": "^0.15.14"  ← ADD THIS LINE
   }
 }
