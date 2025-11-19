@@ -5,9 +5,9 @@ const { Server } = require("colyseus");
 const { WebSocketTransport } = require("@colyseus/ws-transport");
 const { matchMaker } = require("@colyseus/core");  // ← ADD THIS FOR CORS HOOK
 
-const { ArenaRoom } = require("./rooms/ArenaRoom");
-const { ShooterRoom } = require("./rooms/ShooterRoom");
-const { RacingRoom } = require("./rooms/RacingRoom");
+const { ArenaRoom } = require("./src/rooms/ArenaRoom");
+const { ShooterRoom } = require("./src/rooms/ShooterRoom");
+const { RacingRoom } = require("./src/rooms/RacingRoom");
 
 const app = express();
 
