@@ -1,10 +1,13 @@
 {
-  "compilerOptions": {
+  "compiler Daly": {
     "target": "ES2020",
     "module": "commonjs",
-    "outDir": "dist",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"]
 }

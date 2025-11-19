@@ -1,17 +1,13 @@
 {
-  "name": "chaotix-multiplayer-server",
+  "name": "chaotix-multiplayer",
   "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "colyseus": "^0.15.14",
     "express": "^4.19.2",
     "cors": "^2.8.5"
-  },
-  "devDependencies": {
-    "typescript": "^5.5.4",
-    "@types/express": "^4.17.21"
   }
 }

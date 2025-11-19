@@ -1,11 +1,4 @@
-import { BaseRoom, MyRoomState, Player } from "./BaseRoom";
+const { BaseRoom } = require("./BaseRoom");
 
-export class RacingRoom extends BaseRoom<MyRoomState> {
-  onMessage(client: any, data: { x: number; y: number }) {
-    const player = this.state.players.get(client.sessionId);
-    if (player) {
-      player.x = data.x;
-      player.y = data.y;
-    }
-  }
-}
+class RacingRoom extends BaseRoom {}
+module.exports = { RacingRoom };
