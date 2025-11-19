@@ -1,45 +1,49 @@
+// server/rooms/BaseRoom.js — PURE JAVASCRIPT (NO TYPESCRIPT DECORATORS)
+
 const { Room } = require("colyseus");
-const { Schema, MapSchema, type } = require("@colyseus/schema");
-
-class Player extends Schema {
-  @type("number") x = 400;  
-  @type("number") y = 300;   
-  @type("string") color = "#ff0000";
-  @type("number") angle = 0;
-}
-
-class GameState extends Schema {
-  @type({ map: Player }) players = new MapSchema();
-}
 
 class BaseRoom extends Room {
   onCreate() {
-    this.setState(new GameState());
     this.maxClients = 10;
 
-    // Auto-delete empty room after 5 minutes
+    // Simple state — just a plain object
+    this.setState({
+      players: {}
+    });
+
+    // Auto-delete empty room after 5 min
     this.clock.setTimeout(() => {
       if (this.clients.size === 0) this.disconnect();
     }, 300000);
 
+    // Handle movement
     this.onMessage(0, (client, data) => {
-      const player = this.state.players.get(client.sessionId);
+      const player = this.state.players[client.sessionId];
       if (player) {
         if (data.x !== undefined) player.x = data.x;
         if (data.y !== undefined) player.y = data.y;
-        if (data.angle !== undefined) player.angle = data.angle;
       }
     });
   }
 
   onJoin(client) {
-    const player = new Player();
-    player.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    this.state.players.set(client.sessionId, player);
+    // Create player in the center
+    this.state.players[client.sessionId] = {
+      x: 400,
+      y: 300,
+      color: this.getRandomColor()
+    };
+    console.log(client.sessionId, "joined");
   }
 
   onLeave(client) {
-    this.state.players.delete(client.sessionId);
+    delete this.state.players[client.sessionId];
+    console.log(client.sessionId, "left");
+  }
+
+  getRandomColor() {
+    const colors = ["#ff3b3b", "#3bff3b", "#3b9bff", "#ffbf3b", "#ff3bff", "#3bffff"];
+    return colors[Math.floor(Math.random() * colors.length)];
   }
 }
 
