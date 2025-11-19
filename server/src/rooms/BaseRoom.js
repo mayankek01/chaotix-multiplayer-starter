@@ -2,8 +2,8 @@ const { Room } = require("colyseus");
 const { Schema, MapSchema, type } = require("@colyseus/schema");
 
 class Player extends Schema {
-  @type("number") x = Math.floor(Math.random() * 700) + 50;
-  @type("number") y = Math.floor(Math.random() * 500) + 50;
+  @type("number") x = 400;  
+  @type("number") y = 300;   
   @type("string") color = "#ff0000";
   @type("number") angle = 0;
 }
